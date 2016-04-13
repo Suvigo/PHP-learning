@@ -1,0 +1,14 @@
+PHP如何在数据库中进行查询某一月的数据。
+
+code:
+    $date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');//当前时间
+    $beginThismonth = strtotime(date('Y-m-1 00:00:00', $date));//本月开始时间的Unix时间戳
+    $endThismonth = strtotime(date('Y-m-'.date('t',$date).'23:59:59', $date));//本月结束时间的Unix时间戳
+    
+    $sql = "Select * From xxx where time > $beginThismonth AND time <$endThismonth";
+
+调用查询函数就可以知道当月有多少数据存在。
+
+
+当然这是一种方法，还有很多方法比如说字符串匹配方法。
+因为这种情况是在mysql数据库中存放的时间是Unix时间戳的形式，所以采用这种方法进行比较。

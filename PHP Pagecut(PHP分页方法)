@@ -1,0 +1,50 @@
+PHP分页方法，返回一个数组带有页码和其他url，待解决问题   ：    "..."的判断。
+
+protected function PageCuts($page, $pageSize, $totalCount, $var) {
+        //$page当前页码,$pageSize每一页多少条语句限制,$totalCount数据总量,$var url变量
+        $lastPage = ceil($totalCount/$pageSize); //最后一页编号
+        $offect = $page * $pageSize;//每页开始数据编号
+        $lpm1 = $lastPage - 1;                   //倒数第二页编号
+        $back = $page - 1;
+        $next = $page + 1;
+        $url = URL.$var;//URL为静态常量，$var为url变量
+        $back_url = $page > 0 ? $url.$back : $url.$page;//后退页面url
+        $next_url = $page+1 < $lastPage ? $url.$next : $url.$page;//前进页面url
+        $page_array = [];
+        $page++ ;//传过来的page是比正常的小于1，先恢复正常
+        $countk = 0 ;//$page_array的长度
+        //将分页页码放入数组
+        //页面小于5，直接按照页面来
+        if($lastPage <=5) {
+            for($i = 1; $i<=$lastPage; $i++){
+                array_push($page_array, $i);
+                $countk++;
+            }
+        }else{
+            //左对齐
+            if($page <= 3){
+                for($i = 1; $i<=5; $i++){
+                    array_push($page_array, $i);
+                    $countk++;
+                }
+                array_push($page_array,"...");
+                $countk++;
+            }elseif ($page >= $lastPage-2){//右对齐
+                array_push($page_array,"...");
+                $countk++;
+                for($i = $lastPage-4; $i<=$lastPage; $i++){
+                    array_push($page_array, $i);
+                    $countk++;
+                }
+            }else{//在中间做成... 3 4 5 6 7 ...类型
+                array_push($page_array,"...");$countk++;
+                for($i = $page-2; $i <= $page+2 ; $i++){
+                    array_push($page_array,$i);
+                    $countk++;
+                }
+                array_push($page_array,"...");$countk++;
+            }
+        }
+        //返回数组
+        return array("url"=>$url, "offect"=> $offect, "countk"=>$countk, "page"=>$page, "back"=>$back_url, "next"=>$next_url, "last_page"=>$lastPage, "page_array"=>$page_array);
+    }

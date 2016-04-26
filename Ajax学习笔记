@@ -1,0 +1,77 @@
+1.创建XMLHttpRequest对象
+
+<script language= "javascript" type="text/javascript">
+var xmlHttp = new XMLHttpRequest();
+
+</script>
+
+2.Ajax是异步发送请求，JavaScript代码不用等待服务器的相应，用户可以继续输入数据，滚动屏幕等等
+
+3.对于不同的浏览器，创建不同的对象
+<script language= "javascript" type="text/javascript">
+     var xmlHttp = false;
+     try{
+          xmlHttp = new ActiveObject("Msxml2.XMLHTTP");
+     } catch(e) {
+          try{
+          xmlHttp = new ActiveObject("Microsoft.XMLHTTP");
+     } catch(e2) {
+          xmlHttp = false;
+     }
+}
+</script>
+
+
+4.
+//发出Ajax请求，例子
+     function CallServer(){
+          // body...
+          var city = document.getElementById("city").value;
+          var state = document.getElementById("state").value;
+
+          if((city == null) || (city == "")) return ;
+          if((state == null) || (state == "")) return ;
+
+          //创建连接
+
+          var url = "/script/getZipCode.php?city = " + escape(city) + "&state=" +escape(state);  //php脚本
+
+          //打开一个跟服务器端的连接
+          xmlHttp.open("GET", url ,true);
+
+          //异步请求中，当服务端处于运行完成时执行的函数
+          xmlHttp.onreadystatechang = updatePage;
+
+          //发送请求
+          xmlHttp.send(null);
+     }
+5.
+updatePage()函数
+function updatePage () {
+          // body...
+          if(xmlHttp.readyState == 4){//服务器就绪状态
+               var response = xmlHttp.responseText;
+               document.getElementById("zipCode").value = response;//不同城市的zip编码
+          } 
+     }
+6. 调用Ajax就直接在html里面通过事件方法调用Ajax函数。
+7. 创建具有错误处理能力的XMLHttpRequest
+<script language="javascript" type="text/javascript">
+var response = false;
+try{
+     request = new XMLHttpRequest();
+} catch(trymicrosoft){
+     try{
+          request = new ActiveObject("Msxml2.XMLHTTP");
+     }catch(failed){
+          request = false;
+     }
+}
+
+if(!request){
+     alert("Error initializing XMLHttpRequest!");
+}
+</script>
+如果出错就直接给用户弹出信息。
+
+8.

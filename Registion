@@ -1,0 +1,216 @@
+<?php
+    //session_start();
+    include("conn/conn.php");
+?>
+<html>
+  <head>
+    <link rel="stylesheet" href="common/css/bootstrap.css">
+	  <link href="common/css/stu_common.css" rel="stylesheet">
+	  <script src="common/jquery/jquery-2.1.1.min.js"></script>
+    <meta http-equiv = "content-type" content = "text/html; charset=utf8"/>
+    <title>Register</title>
+    <script type="text/javascript">
+        $(function(){
+            $("#menu4").addClass("menuclick");
+        })
+        function check_id(){
+          obj1 = document.getElementById("stu_id");
+          obj2 = document.getElementById("id_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入id");
+            obj2.appendChild(info);
+          }
+        }
+        function check_name(){
+          obj1 = document.getElementById("stu_name");
+          obj2 = document.getElementById("name_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入姓名");
+            obj2.appendChild(info);
+          }
+        }
+        function check_cla(){
+          obj1 = document.getElementById("stu_cla");
+          obj2 = document.getElementById("cla_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入班级");
+            obj2.appendChild(info);
+          }
+        }
+        function check_age(){
+          obj1 = document.getElementById("stu_age");
+          obj2 = document.getElementById("age_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入年龄");
+            obj2.appendChild(info);
+          }
+        }
+        function check_tel(){
+          obj1 = document.getElementById("stu_tel");
+          obj2 = document.getElementById("tel_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入姓名");
+            obj2.appendChild(info);
+          }
+          else if (obj1.value.length!="11") {
+            info = document.createTextNode("手机号无效，请重新输入");
+            obj2.appendChild(info);
+          }
+        }
+        function check_nick(){
+          obj1 = document.getElementById("stu_nick");
+          obj2 = document.getElementById("nick_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入昵称");
+            obj2.appendChild(info);
+          }
+        }
+        function check_qq(){
+          obj1 = document.getElementById("stu_qq");
+          obj2 = document.getElementById("qq_info");
+          while (obj2.hasChildNodes()) {
+              obj2.removeChild(obj2.childNodes[0]);
+          }
+          if(ob1.value == ""){
+            info = document.createTextNode("请输入qq");
+            obj2.appendChild(info);
+          }
+        }
+        function check(){
+		          if(registe.name.value==""||
+		          registe.stu_cla.value==""||
+		          registe.stu_tel.value==""||
+		          registe.stu_qq.value==""||
+		          registe.stu_nick.value==""||
+              registe.stu_id.value==""||
+              registe.stu_age.value==""){
+	               alert("信息不完整!");
+			           return(false);
+		          }
+		          else{
+			             return(true);
+		          }
+        }
+    </script>
+    <style type = "text/css">
+      h1 {
+	background-color: #FFFFFF;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+      body {
+	background-image: url(pic/12.jpg);
+	font-family: "Times New Roman", Times, serif;
+}
+       .div{
+			      float:left;
+			      width:230px;
+			      color:red;
+		  }
+      label {
+	color: #000000;
+	font-family: "Times New Roman", Times, serif;
+}
+      p {
+	color: #000000;
+	font-size: 5em;
+}
+    </style>
+  </head>
+  <body>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2" class="ax_default box_1">
+        <div id="u2_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3" class="text">
+          <h1 align="center">BISTU校赛注册@第8届</h1>
+        </div>
+      </div>
+  <table height="372" align="center">
+  <form name="registe" method="POST" action="registe.action.php" onSubmit="return check();" >
+		<tr>
+		<td width="72"><label for="stu_id" style="align: center; color: #000000; font-family: 'Times New Roman', Times, serif;">&nbsp;学号：&nbsp;</label></td>
+		<td width="207"><input type="text" id="stu_id" name="stu_id" onBlur="check_id()"/></td>
+    </tr>
+
+		<tr>
+		<td><label for="stu_name">&nbsp;姓名：&nbsp;</label></td>
+		<td><input type="text" id="stu_name" name="stu_name" onBlur="check_name()"></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_sex">&nbsp;性别：&nbsp;</label></td>
+		<td><select name="stu_sex" id="stu_sex" style="width:130pt">
+			<option value="男">男</option>
+			<option value="女">女</option>
+		</select></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_cla">&nbsp;班级：&nbsp;</label></td>
+    <td><input type="text" id="stu_cla" name="stu_cla" onBlur="check_cla()"></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_age">&nbsp;年龄：&nbsp;</label></td>
+    <td><input type="text" id="stu_age" name="stu_age" onBlur="check_age()"></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_tel">&nbsp;手机号：&nbsp;</label></td>
+    <td><input type="text" id="stu_tel" name="stu_tel" onBlur="check_tel()"></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_nick">&nbsp;杭电昵称：&nbsp;</label></td>
+		<td><input type="text" id="stu_nick" name="stu_nick" onBlur="check_nick()"></td>
+		</tr>
+
+		<tr>
+		<td><label for="stu_qq">&nbsp;QQ：&nbsp;</label></td>
+		<td><input type="text" id="stu_qq" name="stu_qq" onBlur="check_qq()"></td>
+		</tr>
+
+		<tr>
+		<td colspan="2">   <input name="registe_submit" type="submit" value="确认注册"></td>
+		</tr>
+    </form>
+  </table>
+    </div>
+
+    <div id="u25" class="ax_default _图片">
+      <img id="u25_img" class="img " src="model/images/register/u25.png"/>
+      <!-- Unnamed () -->
+      <div id="u26" class="text" style="display: none; visibility: hidden">
+        <p><span></span></p>
+      </div>
+  </div>
+
+    <!-- Unnamed (矩形) -->
+    <div id="u27" class="ax_default _文本段落">
+      <div id="u27_div" class=""></div>
+      <!-- Unnamed () -->
+      <div id="u28" class="text" style="visibility: visible; font-size: 0.2em;">
+        <p><span>杭电昵称如上图，登录之后右上角第一个就是。</span></p>
+      </div>
+    </div>
+  </body>
+</html>
